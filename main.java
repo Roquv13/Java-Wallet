@@ -20,32 +20,37 @@ class AmountChange {
     public void usrAmount() {
         System.out.println("Amount on user account: " + amountUser);
     }
+     public float usrWallet() {
+         return amountUser;
+     }
 }
 
 class Currency {
-    float amountUser;
     float amountCurrency;
+    AmountChange amoChg = new AmountChange();
     public void usd(float currency) {
         currency = 1/currency;
-        amountCurrency = amountUser * currency;
+        System.out.println(amoChg.amountUser);
+        amountCurrency = amoChg.usrWallet() * currency;
         System.out.println("Value of wallet in USD: " + amountCurrency);
     }
 
     public void euro(float currency) {
         currency = 1/currency;
-        amountCurrency = amountUser * currency;
+        amountCurrency = amoChg.amountUser * currency;
         System.out.println("Value of wallet in EURO: " + amountCurrency);
     }
 
     public void chf(float currency) {
         currency = 1/currency;
-        amountCurrency = amountUser * currency;
+        amountCurrency = amoChg.amountUser * currency;
         System.out.println("Value of wallet in CHF: " + amountCurrency);
     }
 }
 public class main {
     public static void main(String[] args) {
         AmountChange amoChg = new AmountChange();
+        Currency curr = new Currency();
         Scanner sc = new Scanner(System.in);
 
         amoChg.init();
@@ -62,6 +67,21 @@ public class main {
             float amountToRemove = sc.nextFloat();
             amoChg.remove(amountToRemove);
         } else System.out.println("Type again!");
-        amoChg.usrAmount();
+
+        float wallet = amoChg.usrWallet();
+        System.out.println(wallet);
+
+        System.out.println("Type currency to change: ");
+        System.out.println("1. USD");
+        System.out.println("2. EURO");
+        System.out.println("3. CHF");
+        int currChange = sc.nextInt();
+        if (currChange == 1) {
+            curr.usd(4.40f);
+        } else if (currChange == 2) {
+            System.out.println("2 currency");
+        } else if (currChange == 3) {
+            System.out.println("2 currency");
+        } else System.out.println("Type again!!!");
     }
 }

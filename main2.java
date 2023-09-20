@@ -5,6 +5,12 @@ import java.util.Scanner;
 class Amount {
     Scanner sc = new Scanner(System.in);
     float userAmount;
+    public void listChg() {
+        System.out.println("1. Add amount");
+        System.out.println("2. Remove amount");
+        System.out.println("3. Display amount");
+        System.out.println("4. Exit");
+    }
     public float initAmount() {
         System.out.println("Add your initial amount of wallet: ");
         userAmount = sc.nextFloat();
@@ -70,18 +76,38 @@ public class main2 {
         CurrencyConverter currConv = new CurrencyConverter();
         //init
         amount.initAmount();
-        //add
-        System.out.println("Type amount to add: ");
-        float addValue = sc.nextFloat();
-        amount.add(addValue);
-        //remove
-        System.out.println("Type amount to remove: ");
-        float removeValue = sc.nextFloat();
-        amount.remove(removeValue);
-        //display amount
-        System.out.println("Wallet amount: ");
-        System.out.println(amount.userAmount);
+        System.out.println("What do you want to do?");
+        amount.listChg();
+        int chgAmount = sc.nextInt();
+        while (true) {
+            //add
+            if (chgAmount == 1) {
+                System.out.println("Type amount to add: ");
+                float addValue = sc.nextFloat();
+                amount.add(addValue);
+                chgAmount = 0;
+            }
+            //remove
+            else if (chgAmount == 2) {
+                System.out.println("Type amount to remove: ");
+                float removeValue = sc.nextFloat();
+                amount.remove(removeValue);
+                chgAmount = 0;
+            }
+            //display amount
+            else if (chgAmount == 3) {
+                System.out.println("Wallet amount: ");
+                System.out.println(amount.userAmount);
+                chgAmount = 0;
+            } else if (chgAmount == 4) {
+                break;
+            } else System.out.println("Type again!");
+            System.out.println("What do you want to do?");
+            amount.listChg();
+            chgAmount = sc.nextInt();
+        }
 
+        //currency
         currConv.list();
         System.out.println("Choose currency to calculate your amount of wallet: ");
         int currencyChoose = sc.nextInt();
